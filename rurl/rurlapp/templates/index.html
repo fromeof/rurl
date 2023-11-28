@@ -1,1 +1,47 @@
-<h1> cc </h1>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>RACOURCISSEUR D'URL</title>
+    <meta charset="UTF-8">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+</head>
+<body>
+    <h1>RACOURCISSEUR D'URL</h1>
+    <div id="content">
+        <div class="leftbox">
+            <h1>Entrez l'url à raccourcir</h1>
+            <div class="o-url">
+                <form name="formulaire" method='POST'>
+                    {% csrf_token %}
+                    <input id="link" type="text" name="link">
+                    <button type="submit">Raccourcir</button>
+                </form>
+                <script type="text/javascript">
+                    $(document).on('submit', '#formulaire', function(e){
+                        e.preventDefault();
+                        $.ajax({
+                            type: 'POST',
+                            url: '/create',
+                            data: {
+                                link:$('#link').val(),
+                                csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+                            },
+                            success: function(data){
+                                $('h3').html("localhost:8000/"+data)
+                            }
+                        })
+                    });
+                </script>
+            </div>
+        </div>
+        <div class="rightbox">
+            <h1>Voici votre URL raccourcie</h1>
+            <div class="r-url">
+                <h3> </h3>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
