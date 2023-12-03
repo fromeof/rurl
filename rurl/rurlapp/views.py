@@ -4,7 +4,8 @@ from .models import Link
 import uuid
 
 def index(request):
-    return render(request, 'index.html')
+    data = Link.objects.all()
+    return render(request, 'index.html', {'data': data})
 
 def create(request):
     if request.method == 'POST':

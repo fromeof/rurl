@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.css" />
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.js"></script>
+    <script src="https://cdn.datatables.net/fixedcolumns/3.3.3/js/dataTables.fixedColumns.min.js"></script>
 </head>
 <body>
     <h1>RACOURCISSEUR D'URL</h1>
@@ -55,7 +56,9 @@
     <table id="myTable" class="display">
         <script type="text/javascript">
             $(document).ready( function () {
-                $('#myTable').DataTable();
+                $('#myTable').DataTable({
+                   
+                })
             } );
         </script>
         <thead>
@@ -67,8 +70,8 @@
         <tbody>
             {% for donnees in data %}
             <tr>
-                <td>{{ mesure.fields.lien }}</td>
-                <td></td>
+                <td>{{ donnees.lien }}</td>
+                <td>localhost:8000/rurl{{ donnees.idd }}</td>
             </tr>
             {% endfor %}
         </tbody>
