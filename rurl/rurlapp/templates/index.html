@@ -5,7 +5,9 @@
     <meta charset="UTF-8">
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.css" />
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.js"></script>
 </head>
 <body>
     <h1>RACOURCISSEUR D'URL</h1>
@@ -30,7 +32,8 @@
                           csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
                         },
                         success: function(data){
-                            $('h3').html("localhost:8000/"+data)
+                            console.log(data)
+                            $('.r-url h3').html("localhost:8000/rurl/" + data)
                           
                         }
                       });
@@ -48,3 +51,27 @@
     </div>
 </body>
 </html>
+<div>
+    <table id="myTable" class="display">
+        <script type="text/javascript">
+            $(document).ready( function () {
+                $('#myTable').DataTable();
+            } );
+        </script>
+        <thead>
+            <tr>
+                <th>Lien d'origine</th>
+                <th>Lien raccourci</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for donnees in data %}
+            <tr>
+                <td>{{ mesure.fields.lien }}</td>
+                <td></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        
+    </table>
+</div>
