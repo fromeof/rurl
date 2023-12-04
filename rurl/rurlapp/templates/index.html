@@ -17,8 +17,10 @@
             <h1>Entrez l'url à raccourcir</h1>
             <div class="o-url">
                 <form id="post-form">{% csrf_token %}
-                    <input id="link" type="text" name="link">
-                    <button type="submit">Raccourcir</button>
+                    <div id="b">
+                        <input id="link" type="text" name="link">
+                        <button type="submit">Raccourcir</button>
+                    </div>
                 </form>
 
                 <script type="text/javascript">
@@ -52,14 +54,16 @@
     </div>
 </body>
 </html>
-<div>
+<div id="tableau">
     <table id="myTable" class="display">
         <script type="text/javascript">
             $(document).ready( function () {
-                $('#myTable').DataTable({
-                   
+                var table = $('#myTable').DataTable({
+                    paging: false,
+                    scrollY: "500px",
+                    info: false
                 })
-            } );
+            });
         </script>
         <thead>
             <tr>
@@ -70,8 +74,13 @@
         <tbody>
             {% for donnees in data %}
             <tr>
-                <td>{{ donnees.lien }}</td>
-                <td>localhost:8000/rurl{{ donnees.idd }}</td>
+                <td>{% if donnees.lien|length > 200 %}
+                        {{ donnees.lien|slice:":200"}}<br>{{donnees.lien|slice:"200:"}}
+                    {% else %}
+                        {{ donnees.lien }}
+                    {% endif %}
+                </td>
+                <td>localhost:8000/rurl/{{ donnees.idd }}</td>
             </tr>
             {% endfor %}
         </tbody>

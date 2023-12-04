@@ -12,12 +12,11 @@ body {
 div#content div {
     display: inline-block;
     width: 49%;
+    vertical-align: top;
 }
-div#content div.leftbox{
-    
-}
-div#content div.rightbox{
 
+div#content div.rightbox{
+    text-align: center;
 }
 
 div#content div.o-url {
@@ -29,5 +28,33 @@ div#content div.r-url {
     background-color: rgb(155, 140, 169);
     width: 100%;
     border-radius: 5px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+div#content div.r-url h3 {
+    margin: 0;
 }
 
+div#tableau {
+    overflow: auto;
+}
+
+form#post-form {
+    height: 50px;
+    text-align: center;
+}
+div#b {
+    display: inline-block;
+    padding: 15px;
+    
+}
+div#content {
+    margin-bottom: 10px;
+}
+div#content div.leftbox, div#content div.rightbox { 
+    display: inline-block;
+    vertical-align: top;
+    margin: 0 5px; 
+}
