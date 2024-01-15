@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.css" />
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.js"></script>
+    <script src="https://cdn.datatables.net/fixedcolumns/3.3.3/js/dataTables.fixedColumns.min.js"></script>
+</head>
+<body>
+    <div id="tableau">
+        <table id="myTable" class="display">
+            <script type="text/javascript">
+                $(document).ready( function () {
+                    var table = $('#myTable').DataTable({                   
+                    })
+                });
+            </script>
+            <thead>
+                <tr>
+                    <th>Lien d'origine</th>
+                    <th>Lien raccourci</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for donnees in data %}
+                <tr>
+                    <td>{% if donnees.lien|length > 200 %}
+                            {{ donnees.lien|slice:":200"}}<br>{{donnees.lien|slice:"200:"}}
+                        {% else %}
+                            {{ donnees.lien }}
+                        {% endif %}
+                    </td>
+                    <td>localhost:8000/rurl/{{ donnees.idd }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            
+        </table>
+    </div>
+</body>
+</html>

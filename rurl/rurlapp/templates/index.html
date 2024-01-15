@@ -37,7 +37,7 @@
                         success: function(data){
                             console.log(data)
                             $('.r-url h3').html("localhost:8000/rurl/" + data)
-                          
+                            $('#myTable').DataTable().ajax.reload();
                         }
                       });
                     });
@@ -52,38 +52,8 @@
             </div>
         </div>
     </div>
+<div>
+    <a href="{% url 'history' %}"> Voir l'historique </a>
+</div>
 </body>
 </html>
-<div id="tableau">
-    <table id="myTable" class="display">
-        <script type="text/javascript">
-            $(document).ready( function () {
-                var table = $('#myTable').DataTable({
-                    paging: false,
-                    scrollY: "500px",
-                    info: false
-                })
-            });
-        </script>
-        <thead>
-            <tr>
-                <th>Lien d'origine</th>
-                <th>Lien raccourci</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for donnees in data %}
-            <tr>
-                <td>{% if donnees.lien|length > 200 %}
-                        {{ donnees.lien|slice:":200"}}<br>{{donnees.lien|slice:"200:"}}
-                    {% else %}
-                        {{ donnees.lien }}
-                    {% endif %}
-                </td>
-                <td>localhost:8000/rurl/{{ donnees.idd }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-        
-    </table>
-</div>
